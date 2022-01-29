@@ -1,0 +1,266 @@
+#include<iostream>
+#include <cmath>
+#include <stdlib.h>
+
+using namespace std;
+
+int towerA[15],towerB[15],towerC[15],movecount=0;
+int topA=-1,topB=-1,topC=-1,sizes=15,numd,move_to_win,temp;
+
+void menu();
+void towergame();
+void moveA_to_b();
+void moveA_to_c();
+void moveb_to_a();
+void moveb_to_c();
+void movec_to_a();
+void movec_to_b();
+int pushA(int val);
+int pushB(int val);
+int pushC(int val);
+int popA();
+int popB();
+int popC();
+void display();
+
+int main()
+{
+    menu();
+    return 0;
+}
+void menu()
+{
+    cout<<"\n\n\n\t\t\t------------------------Tower Of Hanoi Game------------------------\n\n";
+    cout<<"\t\t\t\t 1.play game\n";
+    cout<<"\t\t\t\t 2.for exiting program\n\n";
+    cout<<"\t\t\t\t Enter your choice: ";
+    char choice;
+
+    cin>>choice;
+
+    while (choice < '1' || choice > '2')
+{
+    cout << " \n\n\t\t\t\tPlease enter a choice from numbers 1-2 " << endl;
+    cin >> choice;
+}
+
+    switch(choice)
+    {
+    case '1':
+       towergame();
+    case '2':
+       exit(1);
+
+    }
+
+}
+void towergame()
+{
+    cout<<" \n\t\t\t\tEnter number of disc(Maximum number of disk is 8):";
+    a:
+	cin>>numd;
+    if (numd<=8){
+    move_to_win=(pow(2,numd)-1);
+    for (int i=numd;i>0;i--)
+	{
+    pushA(i);
+	}
+	
+	display();
+	
+    cout<<"\n\t\t\t\t1.To move from tower A to B\n";
+    cout<<"\t\t\t\t2.To move from tower A to c\n";
+    cout<<"\t\t\t\t3.To move from tower B to A\n";
+    cout<<"\t\t\t\t4.To move from tower B to C\n";
+    cout<<"\t\t\t\t5.To move from tower C to B\n";
+    cout<<"\t\t\t\t6.To move from tower C to A\n";
+
+    cout<<" \n\t\t\t\tEnter your move -1 to exit :";
+
+    int ch;
+    cin>>ch;
+
+    while(ch!=-1){
+    switch(ch)
+    {
+    case 1:
+        moveA_to_b();
+        movecount++;
+        display();
+        cout<<"\t\t\t\tnext move";
+        break;
+    case 2:
+        moveA_to_c();
+        movecount++;
+        display();
+        cout<<"\t\t\t\tnext move";
+        break;
+    case 3:
+        moveb_to_a();
+        movecount++;
+        display();
+        cout<<"\t\t\t\tnext move";
+    case 4:
+        moveb_to_c();
+        movecount++;
+        display();
+        cout<<"\t\t\t\tnext move";
+        break;
+    case 5:
+        movec_to_b();
+        movecount++;
+        display();
+        cout<<"\t\t\t\tnext move";
+        break;
+    case 6:
+        movec_to_a();
+        movecount++;
+        display();
+        cout<<"\t\t\t\tnext move";
+        break;
+    }
+    cout<<" \n\t\t\t\tEnter your move -1 to exit :";
+    cin>>ch;
+    }
+    
+    if(movecount<=move_to_win&&topA==numd)
+    {
+    	cout<<"\t\t\t\t&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&";
+    	cout<<"\t\t\t\t&Congragulations you have won the game&";
+    	cout<<"\t\t\t\t&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&";
+	}
+	else if(movecount<=move_to_win&&topB==numd){
+		cout<<"\t\t\t\t&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&";
+    	cout<<"\t\t\t\t&Congragulations you have won the game&";
+    	cout<<"\t\t\t\t&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&";
+	}
+	else if(movecount<=move_to_win&&topC==numd){
+		cout<<"\t\t\t\t&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&";
+    	cout<<"\t\t\t\t&Congragulations you have won the game&";
+    	cout<<"\t\t\t\t&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&";
+	}
+	else
+	cout<<"\t\t\t\tSory you have lost the game ";
+}
+else {
+cout<<"\t\t\t\tinvalid number of disk try again";
+goto a;}
+
+}
+
+int pushA(int val) {
+	
+    if(topA>=sizes-1){
+    	cout<<"\t\t\t\tyou are trying to add to a full tower"<<endl;
+    	}
+    else {
+      topA++;
+      towerA[topA]=val;
+	}
+	return val;
+}
+int popA() {
+
+    if(topA<=-1){
+   cout<<"\t\t\t\tYou are trying to move from empty tower"<<endl;
+   }
+   else {
+    	temp=towerA[topA];
+    	topA--;
+}
+	return temp;
+}
+
+int pushB(int val) {
+	
+	if(topB>=sizes-1){
+    	cout<<"\t\t\t\tyour move is invalid"<<endl;
+    	}
+    else {  
+    	topB++;
+    	towerB[topB]=val;
+}	
+	return val; 
+}
+int popB() {
+	
+    if(topB<=-1){
+   cout<<"\t\t\t\tYou are trying to move from empty tower"<<endl;
+   }
+   else {
+      temp=towerB[topB];
+      topB--;
+}
+	return temp;
+}
+
+int pushC(int val) {
+	
+    if(topC>=sizes-1){
+    	cout<<"\t\t\t\tyour move is invalid"<<endl;
+    	}
+    else {
+    	topC++;
+    	towerC[topC]=val;
+}
+	return val;
+}
+int popC() {
+	
+    if(topC<=-1){
+	   cout<<"\t\t\t\tYou are trying to move from empty tower"<<endl;
+	   }
+    else {
+      temp=towerC[topC];
+      topC--;
+  }
+  return temp;
+}
+
+void moveA_to_b()
+{
+	pushB(popA());
+}
+void moveA_to_c()
+{
+	pushC(popA());
+}
+void moveb_to_a()
+{
+	pushA(popB());
+}
+void moveb_to_c()
+{
+	pushC(popB());
+}
+void movec_to_a()
+{
+	pushA(popC());
+}
+void movec_to_b()
+{
+	pushB(popC());
+}
+void display()
+{
+	cout<<"\n\n\t\t\t\t-------------------------------------------------------------\n\n";
+	cout<<"\t\t\t\tTOWER A -->";
+	for (int i = 0; i <=topA; ++i)
+	cout<<towerA[i]<<" ";
+	cout<<"\n\n\t\t\t\t-------------------------------------------------------------\n\n";
+	
+	
+	cout<<"\n\n\t\t\t\t-------------------------------------------------------------\n\n";
+	cout<<"\t\t\t\tTOWER B -->";
+	for (int i = 0; i <=topB; ++i)
+	cout<<towerB[i]<<" ";
+	cout<<"\n\n\t\t\t\t-------------------------------------------------------------\n\n";
+	
+	
+	cout<<"\n\n\t\t\t\t-------------------------------------------------------------\n\n";
+	cout<<"\t\t\t\tTOWER C -->";
+	for (int i = 0; i <=topC; ++i)
+	cout<<towerC[i]<<" ";
+	cout<<"\n\n\t\t\t\t-------------------------------------------------------------\n\n";
+
+}
