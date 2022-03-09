@@ -1,10 +1,20 @@
+/*
+Group 2
+section B
+Group memebers:
+	Ephrata Wedajo Ets0249/12
+	Firdews Abrar Ets0296/12
+	Fatima Abayneh Ets0286/12
+	Seble Samuel Ets1041/12
+	Gelila Werkneh Ets0312/12
+*/
 #include<iostream>
 #include <cmath>
 #include <stdlib.h>
 #include <cstdlib>
 
 using namespace std;
-
+//Global Variables
 int towerA[15],towerB[15],towerC[15],movecount=0;
 int topA=-1,topB=-1,topC=-1,sizes=15,numd,move_to_win,temp;
 bool check;
@@ -31,10 +41,11 @@ void instruction();
 
 int main()
 {
-	system("COLOR F4");
+	system("COLOR F4");// decorate page
     menu();
     return 0;
 }
+//menu for the game
 void menu()
 {
 	c:
@@ -46,7 +57,7 @@ void menu()
     char choice;
     cin>>choice;
 
-    while (choice < '1' || choice > '3')
+    while (choice < '1' || choice > '3')//validation for the menu
 {
     cout << " \n\n\t\t\t\tPlease enter a choice from numbers 1-3 " << endl;
     cin >> choice;
@@ -54,10 +65,10 @@ void menu()
     switch(choice)
     {
     case '1':
-       towergame();
+       towergame();// game playing function
        break;
     case '2':
-       instruction();
+       instruction();//game instruction
        break;
     case '3':
        exit(1);
@@ -66,105 +77,115 @@ void menu()
 void towergame()
 {
 	b:
-    cout<<"\n\t\t\t\t Enter number of disc(Maximum number of disk is 8):";
+    cout<<"\n\t\t\t\t Enter number of disc(Number of disk is between 3 and 8):";
     a:
 	cin>>numd;
 	system("cls");
-    if (numd<=8){
-    move_to_win=pow(2,numd)-1;
-    for (int i=numd;i>0;i--)
+    if (numd>2&&numd<=8)//number of disc validation
+	{
+    move_to_win=pow(2,numd)-1;//moves to win
+    for (int i=numd;i>0;i--)//mush disks to initial tower
 	{
     pushA(i);
 	}
 	cout<<" \n\t\t\t\tEnter your move :";
 	
-	display();
+	display();//display image of the tower
 		
     int ch;
     cin>>ch;
-
-    while(movecount!=move_to_win){
+	// do while loop to make the user play game
+    do{
     switch(ch)
     {
     case 1:
-        if(moveA_to_b()==false)
+        if(moveA_to_b()==false)//if move is illagal it inform the user
         {cout<<"\n\t\t\t\tIlligal move"<<endl;
-        ++movecount;
-        cout<<"\t\t\t\tNumber of move: "<<movecount<<endl;
+        ++movecount;//count number of move
+        cout<<"\t\t\t\tNumber of move: "<<movecount<<endl;//display number of move
         break;}
+        //if move is correct make the user to procede the game
         else{
-        ++movecount;
+        ++movecount;//count number of move
         display();
-        cout<<"\t\t\t\tNumber of move: "<<movecount<<endl;
+        cout<<"\t\t\t\tNumber of move: "<<movecount<<endl;//display number of move
         cout<<"\t\t\t\tnext move";
         break;}
     case 2:
-        if(moveA_to_c()==false)
+        if(moveA_to_c()==false)//if move is illagal it inform the user
         {cout<<"\n\t\t\t\tIlligal move"<<endl;
-        ++movecount;
-        cout<<"\t\t\t\tNumber of move: "<<movecount<<endl;
+        ++movecount;//count number of move
+        cout<<"\t\t\t\tNumber of move: "<<movecount<<endl;//display number of move
         break;}
+        //if move is correct make the user to procede the game
         else{
-        ++movecount;
+        ++movecount;//count number of move
         display();
-        cout<<"\t\t\t\tNumber of move: "<<movecount<<endl;
+        cout<<"\t\t\t\tNumber of move: "<<movecount<<endl;//display number of move
         cout<<"\t\t\t\tnext move";
         break;}
     case 3:
-        if(moveb_to_a()==false)
+        if(moveb_to_a()==false)//if move is illagal it inform the user
         {cout<<"\n\t\t\t\tIlligal move"<<endl;
-        ++movecount;
-        cout<<"\t\t\t\tNumber of move: "<<movecount<<endl;
+        ++movecount;//count number of move
+        cout<<"\t\t\t\tNumber of move: "<<movecount<<endl;//display number of move
         break;}
+        //if move is correct make the user to procede the game
         else{
-        ++movecount;
+        ++movecount;//count number of move
         display();
-        cout<<"\t\t\t\tNumber of move: "<<movecount<<endl;
+        cout<<"\t\t\t\tNumber of move: "<<movecount<<endl;//display number of move
         cout<<"\t\t\t\tnext move";
         break;}
-    case 4:
+    case 4://if move is illagal it inform the user
         if(moveb_to_c()==false)
         {cout<<"\n\t\t\t\tIlligal move"<<endl;
-        ++movecount;
-        cout<<"\t\t\t\tNumber of move: "<<movecount<<endl;
+        ++movecount;//count number of move
+        cout<<"\t\t\t\tNumber of move: "<<movecount<<endl;//display number of move
         break;}
+        //if move is correct make the user to procede the game
         else{
-        ++movecount;
+        ++movecount;//count number of move
         display();
-        cout<<"\t\t\t\tNumber of move: "<<movecount<<endl;
+        cout<<"\t\t\t\tNumber of move: "<<movecount<<endl;//display number of move
         cout<<"\t\t\t\tnext move";
         break;}
-    case 5:
+    case 5://if move is illagal it inform the user
         if(movec_to_a()==false)
         {cout<<"\n\t\t\t\tIlligal move"<<endl;
-        ++movecount;
-        cout<<"\t\t\t\tNumber of move: "<<movecount<<endl;
+        ++movecount;//count number of move
+        cout<<"\t\t\t\tNumber of move: "<<movecount<<endl;//display number of move
         break;}
+        //if move is correct make the user to procede the game
         else{
         ++movecount;
         display();
-        cout<<"\t\t\t\tNumber of move: "<<movecount<<endl;
+        cout<<"\t\t\t\tNumber of move: "<<movecount<<endl;//display number of move
         cout<<"\t\t\t\tnext move";
         break;}
-    case 6:
+    case 6://if move is illagal it inform the user
         if(movec_to_b()==false)
         {cout<<"\n\t\t\t\tIlligal move"<<endl;
-        ++movecount;
-        cout<<"\t\t\t\tNumber of move: "<<movecount<<endl;
+        ++movecount;//count number of move
+        cout<<"\t\t\t\tNumber of move: "<<movecount<<endl;//display number of move
         break;}
+        //if move is correct make the user to procede the game
         else{
-        ++movecount;
+        ++movecount;//count number of move
         display();
-        cout<<"\t\t\t\tNumber of move: "<<movecount<<endl;
+        cout<<"\t\t\t\tNumber of move: "<<movecount<<endl;//display number of move
         cout<<"\t\t\t\tnext move";
         break;}
     case 7:
-    	exit(1);
+    	exit(1);//option for the player to exit the game
     }
+    if(movecount==move_to_win)//if move to win and number of move is equal it exit the loop
+    break;
     cout<<" \n\t\t\t\tEnter your move :";
-    cin>>ch;
-    }
-    system("cls");
+    cin>>ch;//the move type from the user
+    }while(movecount!=move_to_win);
+    system("cls");//clean screen when the player end game
+    //decide if the player won the game
     if(movecount<=move_to_win)
 	{
     	for (int i = 0; i < topB-1; i++)
@@ -190,12 +211,10 @@ void towergame()
 		}
         else{
             check=false;}
-		}
-	}
-	else{
-	cout<<move_to_win;
+		} 	}
+	else
 		check=false;
-	}
+		//declar for the player that he/she have won the game
 		if (check==true)
 		{
 			cout<<"\t\t\t\t&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\n";
@@ -204,20 +223,23 @@ void towergame()
     		cout<<"\t\t\t\t&                                             &\n";
     		cout<<"\t\t\t\t&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\n";
 		}
+		//inform the player that they have lost the game
 		else
 		{
 			cout<<"\t\t\t\tsorry you have lost the gameS!!!";
 		}
 }
+	//inform the user for invalid number of disk
 	else 
 	{
 		cout<<"\t\t\t\tinvalid number of disk try again";
-		goto a;
+		cout<<"\n\t\t\t\t Enter number of disc(Number of disk is between 3 and 8):";
+		goto a;//retun the user to try again
 	}
-	
 	char choi;
-	cout<<"\n\n\t\t\t\tDo you want to play again(y:yes/N:no) ";
+	cout<<"\n\n\t\t\t\tDo you want to play again(y:yes/N:no) ";//option to play again
 	cin>>choi;
+	//clear the tower for next game
 	if (choi=='y'||choi=='Y')
 	{
 		movecount=0;
@@ -232,19 +254,19 @@ void towergame()
 	else
 	exit(1);
 }
-
+// function to check for empty tower A
 bool isEmptyA(){
 	return (topA < 0);
 }
-
+// function to check for empty tower B
 bool isEmptyB(){
 	return (topB < 0);
 }
-
+// function to check for empty tower C
 bool isEmptyC(){		
 	return (topC < 0);
 }
-
+//function to puth disk to tower A
 int pushA(int val) {
     if(topA>=sizes-1){
     	cout<<"\t\t\t\tyou are trying to add to a full tower"<<endl;
@@ -255,6 +277,7 @@ int pushA(int val) {
 	}
 	return val;
 }
+//function to pop disk from tower A
 int popA() {
     if(isEmptyA()){
    cout<<"\t\t\t\tYou are trying to move from empty tower"<<endl;
@@ -265,7 +288,7 @@ int popA() {
 }
 	return temp;
 }
-
+//function to puth disk to tower B
 int pushB(int val) {
 	if(topB>=sizes-1){
     	cout<<"\t\t\t\tyour move is invalid"<<endl;
@@ -276,6 +299,7 @@ int pushB(int val) {
 }	
 	return val; 
 }
+//function to pop disk from tower B
 int popB() {
     if(isEmptyB()){
    cout<<"\t\t\t\tYou are trying to move from empty tower"<<endl;
@@ -286,7 +310,7 @@ int popB() {
 }
 	return temp;
 }
-
+//function to puth disk to tower c
 int pushC(int val) {
     if(topC>=sizes-1){
     	cout<<"\t\t\t\tyour move is invalid"<<endl;
@@ -297,6 +321,7 @@ int pushC(int val) {
 }
 	return val;
 }
+//function to pop disk from tower C
 int popC() {
     if(isEmptyC()){
 	   cout<<"\t\t\t\tYou are trying to move from empty tower"<<endl;
@@ -307,7 +332,7 @@ int popC() {
   }
   return temp;
 }
-
+//function to move disk from tower A to B 
 bool moveA_to_b()
 {
 	if(!isEmptyA()){
@@ -321,8 +346,7 @@ bool moveA_to_b()
 			return true;}
 		else
 		return false;
-	}
-	}
+	}  }
    else
    {
    cout<<"\t\t\t\tTHE STACK IS EMPTY";
@@ -330,6 +354,7 @@ bool moveA_to_b()
    }
     
 }
+//function to move disk from tower A to C 
 bool moveA_to_c()
 {
 	if(!isEmptyA()){
@@ -343,11 +368,11 @@ bool moveA_to_c()
 			return true;}
 		else
 		return false;
-	}
-	}
+	}  }
    else
     cout<<"\t\t\t\tTHE STACK IS EMPTY";
 }
+//function to move disk from tower B to A 
 bool moveb_to_a()
 {
 	if(!isEmptyB()){
@@ -361,14 +386,14 @@ bool moveb_to_a()
 			return true;}
 		else
 		return false;
-	}
-	}
+	}  	}
   else
     {
     cout<<"\t\t\t\tTHE STACK IS EMPTY";
     return false;
     }
 }
+//function to move disk from tower B to C 
 bool moveb_to_c()
 {
 	if(!isEmptyB()){
@@ -382,14 +407,14 @@ bool moveb_to_c()
 			return true;}
 		else
 		return false;
-	}
-	}
+	}  }
 else
     {
    cout<<"\t\t\t\tTHE STACK IS EMPTY";
    return false;
    }
 }
+//function to move disk from tower C to A
 bool movec_to_a()
 {
 	 if(!isEmptyC()){
@@ -403,14 +428,14 @@ bool movec_to_a()
 			return true;}
 		else
 		return false;
-	}
-	}
+	}  }
   else
 {
    cout<<"\t\t\t\tTHE STACK IS EMPTY";
    return false;
    }
    }
+   //function to move disk from tower C to B 
 bool movec_to_b()
 {
 	if(!isEmptyC()){
@@ -424,15 +449,13 @@ bool movec_to_b()
 			return true;}
 		else
 		return false;
-	}
-	}
+	}  }
   else
 {
    cout<<"\t\t\t\tTHE STACK IS EMPTY";
    return false;
-   }
-   }
-
+   }   }
+//instruction of game
 void instruction()
 {
 	system("cls");
@@ -446,13 +469,10 @@ void instruction()
 	if (chh==1)
 	system("cls");
 	menu();
-	
-	
 }
-
+//function to display every move of the player
 void display()
 {
-	
 	system("cls");
     cout<<"\n\n\n";
     cout<<"\n\t\t\t\t1.To move from tower A to B\n";
@@ -464,23 +484,16 @@ void display()
     cout<<"\t\t\t\t7.To exit the game\n";
   
 	cout<<" \n\t\t\t\tEnter your move :\n\n\n";
-  
     for (int i = topA; i >=0; --i)
-  
     cout<<"\t\t\t\t|   "<<towerA[i]<<"   |\n";
-  
     cout<<"\t\t\t\t|_______|\n";
     cout<<"\t\t\t\t    A   \n\n\n\n";
-  
-	for (int i = topB; i >=0; --i)
+  	for (int i = topB; i >=0; --i)
     cout<<"\t\t\t\t|   "<<towerB[i]<<"   |\n";
-  
     cout<<"\t\t\t\t|_______|\n";
     cout<<"\t\t\t\t    B   \n\n\n\n";
-  
     for (int i = topC; i >=0; --i)
     cout<<"\t\t\t\t|   "<<towerC[i]<<"   |\n";
-  
     cout<<"\t\t\t\t|_______|\n";
     cout<<"\t\t\t\t    C   \n\n\n\n";
 }
